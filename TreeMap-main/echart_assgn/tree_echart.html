@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title> Tree Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+</head>
+<h1 style="background-color:DodgerBlue;">TREE_CHART</h1>
+<body style="background-color:#E8DAEF ;">
+<div id="chart" style="width: 1000px; height: 800px;"></div>
+<script>
+    const formattedData = {
+        name: "A",
+        symbolSize: 30,
+        children: [
+            {
+                name: "B",
+                symbolSize: 20,
+                value: 80,
+                children: [
+                    { name: "D", value: 30 },
+                    { name: "E", value: 50 }
+                ]
+            },
+            {
+                name: "C",
+                symbolSize: 20,
+                value: 120,
+                children: [
+                    { name: "F", value: 20 },
+                    { name: "G", value: 40 },
+                    { name: "H", value: 60 }
+                ]
+            }
+        ]
+    };
+
+    const chartContainer = document.getElementById("chart");
+    const chart = echarts.init(chartContainer);
+
+    const options = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+        series: [
+            {
+                type: "tree",
+                data: [formattedData],
+                top: "1%",
+                left: "7%",
+                layout: 'radial',
+                bottom: "1%",
+                right: "20%",
+                symbolSize: 7,
+                label: {
+                    position: "right",
+                    verticalAlign: "middle",
+                    align: "left",
+                    fontSize: 14,
+                    fontFamily: 'Arial',
+                    fontWeight: 'bold',
+                    color: '#444'
+                },
+                leaves: {
+                    label: {
+                        position: "left",
+                        verticalAlign: "middle",
+                        align: "right",
+                        fontSize: 12,
+                        fontFamily: 'Arial',
+                        color: '#666'
+                    }
+                },
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750,
+                emphasis: {
+                    focus: 'descendant',
+                    label: {
+                        fontWeight: 'bold'
+                    }
+                },
+                color: [
+                    "#F44336",
+                    "#9C27B0",
+                    "#2196F3",
+                    "#4CAF50",
+                    "#FFEB3B",
+                    "#FF9800",
+                    "#795548"
+                ]
+            }
+        ]
+    };
+
+    chart.setOption(options);
+</script>
+</body>
+</html>
+
